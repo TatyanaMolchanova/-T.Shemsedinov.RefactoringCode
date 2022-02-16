@@ -1,31 +1,21 @@
 // Change double quotation to open or close quotation
 
-const EMPTY = '';
+const quotes = str => {
+  const res = str.split('').map((letter, index) => {
+    if (letter === '"' && (str[index - 1] === ' ' || index === 0)) letter = '«';
+    if (letter === '"' && str[index - 1] !== ' ') letter = '»';
+    return letter;
+  });
+  return res.join('');
+}
 
-quotes = function (s) {
-  res = [];
-  open = false;
-  for (c of s) {
-    if (c === '"') {
-      for (i of c) {
-        if (!open) {
-          res.push('«');
-          open = true;
-        } else {
-          res.push('»');
-          open = false;
-        }
-      }
-    } else {
-      if (c !== '"') {
-        for (i of c) {
-          res.push(i);
-        }
-      }
-    }
-  }
-  return res.join(EMPTY);
-};
-
+// const result = quotes('');
+// const result = quotes('""');
+// const result = quotes('Marcus');
+// const result = quotes('"Marcus"');
+// const result = quotes('Ave! "Marcus"');
+// const result = quotes('"Marcus" Ave!');
+// const result = quotes('Hello "Marcus"! Ave "Marcus"');
+// const result = quotes('"Marcus"! Ave "Marcus"!');
 const result = quotes('Hello "Marcus"! Ave "Marcus"!');
 console.log(result);
